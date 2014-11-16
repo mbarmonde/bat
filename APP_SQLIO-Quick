@@ -5,6 +5,8 @@ rem Notes:        Get SQLIO at: https://drive.google.com/folderview?id=0B5OIlT1x
 
 
 
+
+
 rem SQLIO random write test
 echo "**********"
 echo "SQLIO random write test"
