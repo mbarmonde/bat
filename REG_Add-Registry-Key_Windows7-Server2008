@@ -1,4 +1,6 @@
+rem Author:       Mike Barmonde
 rem Description:  Runs REGEDIT to add the specfific .REG file to the registry Windows 7/Server2008 computers only
 rem Usage:        Search and Replace \\path\file.reg with specific values
+rem Notes:        N/A
 
 REGEDIT /S \\path\file.reg
