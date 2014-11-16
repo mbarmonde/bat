@@ -1,4 +1,6 @@
+rem Author:       Mike Barmonde
 rem Description:  Adds a Domain User to the Local Administrator group of a Workstation
 rem Usage:        Search and Replace domain\username with specific values
+rem Notes:        N/A
 
 net localgroup administrators /add domain\username
