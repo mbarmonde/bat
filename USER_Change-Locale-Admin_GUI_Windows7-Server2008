@@ -1,0 +1,4 @@
+rem Description:  Runs System Locale Settings as the local Administrator Windows 7/Server2008 computers only
+rem Usage:        N/A
+
+runas /user:administrator "CONTROL INTERNATIONAL"
