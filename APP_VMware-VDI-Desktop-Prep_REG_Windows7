@@ -1,5 +1,6 @@
 rem Description:  Prepares a Windows 7 desktop with specific settings for a VMware View VDI deployment; based on VMware's recommended Windows 7 file
 rem Usage:        N/A
+rem Notes:        Line 130: Remark this reg line to allow shutdown of the VDI desktop 
 
 
 
