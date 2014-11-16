@@ -1,0 +1,303 @@
+rem Description:  Prepares a Windows 7 desktop with specific settings for a VMware View VDI deployment; based on VMware's recommended Windows 7 file
+rem Usage:        N/A
+
+
+
+
+
+rem Making modifications to the HKLM hive
+
+
+rem Disables IE's First time run dialog: 
+reg ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" /v DisableFirstRunCustomize /t REG_DWORD /d 0x1 /f
+
+rem Disables Superfetch:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v EnableSuperfetch /t REG_DWORD /d 0x0 /f
+
+rem Disables System Restore:
+reg ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v DisableSR /t REG_DWORD /d 0x1 /f
+
+rem Changes the disk Time out value:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Disk" /v TimeOutValue /t REG_DWORD /d 200 /f
+
+rem Sets the Image version:
+reg ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Image" /v Revision /t REG_SZ /d 1.0 /f
+
+reg ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Image" /v Virtual /t REG_SZ /d Yes /f
+
+rem Changes the Application Event Log size and retention values:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\eventlog\Application" /v MaxSize /t REG_DWORD /d 0x100000 /f
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\eventlog\Application" /v Retention /t REG_DWORD /d 0x0 /f
+
+rem Disables the New Network window when a new network is connected to:
+reg ADD "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Network\NewNetworkWindowOff" /f
+
+rem Changes the System Event Log size and retention values:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\eventlog\System" /v MaxSize /t REG_DWORD /d 0x100000 /f
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\eventlog\System" /v Retention /t REG_DWORD /d 0x0 /f
+
+rem Changes the Security Event Log size and retention values:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\eventlog\Security" /v MaxSize /t REG_DWORD /d 0x100000 /f
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\eventlog\Security" /v Retention /t REG_DWORD /d 0x0 /f
+
+rem Disables Dumping data after a crash:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl" /v CrashDumpEnabled /t REG_DWORD /d 0x0 /f
+
+rem Enables and Allows RDP through Windows 7/Server2008 computers only:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0x0 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v UserAuthentication /t REG_DWORD /d 1 /f
+
+rem Disables UAC:
+reg ADD "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system" /v EnableLUA /t REG_DWORD /d 0x0 /f
+
+rem Disables Sideshow:
+reg ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Sideshow" /v Disabled /t REG_DWORD /d 0x1 /f
+
+rem Sets the preferred power plan to High Performance:
+reg ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\{025A5937-A6BE-4686-A844-36FE4BEC8B6D}" /v PreferredPlan /t REG_SZ /d 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c /f
+
+rem Disables the last timestamp:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem" /V NtfsDisableLastAccessUpdate /t REG_DWORD /d 0x1 /f
+
+rem Disables Hard error messages:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Windows" /V ErrorMode /t REG_DWORD /d 00000002 /f
+
+rem Increases the services startup timeout:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /V ServicesPipeTimeout /t REG_BINARY /d 0002bf20 /f
+
+rem Disables ASLR (Address Space Layout Randomization):
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /V MoveImages /t REG_DWORD /d 0x0 /f
+
+rem Disables Prefetch:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /V EnablePrefetcher /t REG_DWORD /d 0x0 /f
+
+rem Disables sending crash alerts:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl" /V SendAlert /t REG_DWORD /d 0x0 /f
+
+rem Disables TCP/IP offload:
+reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /V DisableTaskOffload /t REG_DWORD /d 0x1 /f
+
+rem Disables CIFS notification change:
+reg ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /V NoRemoteRecursiveEvents /t REG_DWORD /d 0x1 /f
+
+rem Disables Offline files:
+reg ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\NetCache" /V Enabled /t REG_DWORD /d 0x0 /f
+
+rem Disables Background layout service:
+reg ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\OptimalLayout" /V EnableAutoLayout /t REG_DWORD /d 0x0 /f
+
+rem Disables Background defragmentation:
+reg ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction" /V Enable /t REG_BINARY /d "N" /f
+
+
+
+
+
+rem Making modifications to the HKCU hive
+
+
+rem Control Panel - Shows Small Icons:
+reg ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" /v AllItemsIconView /t REG_DWORD /d 0x1 /f
+
+rem Folder View - Changes the folder view to show the full path and full menus:
+reg ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState" /V FullPath /t REG_DWORD /d 0x1 /f
+reg ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /V AlwaysShowMenus /t REG_DWORD /d 0x1 /f
+
+rem Control Panel - Hides the Action Center icon on the taskbar:
+reg ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /V HideSCAHealth /t REG_DWORD /d 0x1 /f
+
+rem Control Panel - Changes the screensaver Blank, 10min, and to require a password:
+reg ADD "hkcu\Software\Policies\Microsoft\Windows\Control Panel\Desktop" /v SCRNSAVE.EXE /d "%windir%\system32\scrnsave.scr" /f
+reg ADD "hkcu\Software\Policies\Microsoft\Windows\Control Panel\Desktop" /v ScreenSaveTimeOut /d "600" /f
+reg ADD "hkcu\Software\Policies\Microsoft\Windows\Control Panel\Desktop" /v ScreenSaverIsSecure /d "1" /f
+
+rem Internet Explorer - Changes the IE cache to NOT be persistent:
+reg ADD "hkcu\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Cache" /v Persistent /t REG_DWORD /d 0x0 /f
+
+rem Control Panel - Turns off Feeds:
+reg ADD "hkcu\Software\Microsoft\Feeds" /v SyncStatus /t REG_DWORD /d 0x0 /f
+
+rem Changes the default application timeouts:
+reg ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /V AutoEndTasks /t REG_DWORD /d "1" /f
+reg ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /V HungAppTimeout /t REG_DWORD /d "5000" /f
+reg ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /V WaitToKillAppTimeout /t REG_DWORD /d "10000" /f
+
+rem Changes the menu delay time:
+reg ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /V MenuShowDelay /t REG_DWORD /d "150" /f
+
+rem Disables the Shutdown option on the Start menu:
+reg ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /V NoClose /t REG_DWORD /d 0x1 /f
+
+rem Internet Explorer - Changes offscreen composition for IE:
+reg ADD "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main" /V "Force Offscreen Composition" /t REG_DWORD /d 0x1 /f
+
+rem Control Panel - Disables the desktop cleanup wizard
+reg ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /V NoDesktopCleanupWizard /t REG_DWORD /d 0x1 /f
+
+rem Control Panel - Diables auto searching of network shares/printers:
+reg ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /V NoNetCrawling /t REG_DWORD /d 0x1 /f
+
+rem Turn off all Windows' sounds:
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\.Default\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\AppGPFault\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\CCSelect\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\Close\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\DeviceConnect\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\DeviceDisconnect\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\DeviceFail\.Current" /ve /f 
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\Maximize\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\MenuCommand\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\MenuPopup\.Current" /ve /f 
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\Minimize\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\Open\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\RestoreDown\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\RestoreUp\.Current" /ve /f 
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\ShowBand\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\SystemAsterisk\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\SystemExclamation\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\SystemExit\.Current" /ve /f 
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\SystemHand\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\SystemNotification\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\SystemQuestion\.Current" /ve /f 
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\SystemStart\.Current" /ve /f
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\WindowsLogoff\.Current" /ve /f 
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\WindowsLogon\.Current" /ve /f 
+reg ADD "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\Explorer\Navigating\.Current" /ve /f
+
+rem Modifies the Start Menu to show the run option, to NOT highlight new programs, and to NOT search public folders:
+reg ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /V Start_ShowRun /t REG_DWORD /d 0x1 /f
+reg ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /V Start_NotifyNewApps /t REG_DWORD /d 0x0 /f
+reg ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /V Start_SearchFiles /t REG_DWORD /d 0x1 /f
+
+rem Adds Computer, User Folder, and Recycle Bin to the Desktop:
+reg ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /V {59031a47-3f72-44a7-89c5-5595fe6b30ee} /t REG_DWORD /d 0x0 /f
+reg ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /V {20D04FE0-3AEA-1069-A2D8-08002B30309D} /t REG_DWORD /d 0x0 /f
+reg ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /V {645FF040-5081-101B-9F08-00AA002F954E} /t REG_DWORD /d 0x0 /f
+
+
+
+
+
+rem Using Powershell to disable the following Windows Services powershell get-service:
+
+
+rem Disables BitLocker Drive Encryption Service
+Powershell Set-Service 'BDESVC' -startuptype "disabled"
+rem Disables Block Level Backup Engine Service
+Powershell Set-Service 'wbengine' -startuptype "disabled"
+rem Disables Desktop Window Manager Session Manager
+Powershell Set-Service 'UxSms' -startuptype "disabled"
+rem Disables Disk Defragmenter
+Powershell Set-Service 'Defragsvc' -startuptype "disabled"
+rem Disables HomeGroup Listener
+Powershell Set-Service 'HomeGroupListener' -startuptype "disabled"
+rem Disables HomeGroup Provider
+Powershell Set-Service 'HomeGroupProvider' -startuptype "disabled"
+rem Disables IP Helper
+Powershell Set-Service 'iphlpsvc' -startuptype "disabled"
+rem Disables Microsoft iSCSI Initiator Service
+Powershell Set-Service 'MSiSCSI' -startuptype "disabled"
+rem Disables Microsoft Software Shadow Copy Provider
+Powershell Set-Service 'swprv' -startuptype "disabled"
+rem Disables Offline Files
+Powershell Set-Service 'CscService' -startuptype "disabled"
+rem Disables Secure Socket Tunneling Protocol Service
+Powershell Set-Service 'SstpSvc' -startuptype "disabled"
+rem Disables Security Center
+Powershell Set-Service 'wscsvc' -startuptype "disabled"
+rem Disables SSDP Discovery
+Powershell Set-Service 'SSDPSRV' -startuptype "disabled"
+rem Disables Superfetch
+Powershell Set-Service 'SysMain' -startuptype "disabled"
+rem Disables Tablet PC Input Service
+Powershell Set-Service 'TabletInputService' -startuptype "disabled"
+rem Disables UPnP Device Host
+Powershell Set-Service 'upnphost' -startuptype "disabled"
+rem Disables Volume Shadow Copy
+Powershell Set-Service 'VSS' -startuptype "disabled"
+rem Disables Themes
+Powershell Set-Service 'Themes' -startuptype "disabled"
+rem Disables Windows Backup
+Powershell Set-Service 'SDRSVC' -startuptype "disabled"
+rem Disables Windows Defender
+Powershell Set-Service 'WinDefend' -startuptype "disabled"
+rem Disables Windows Error Reporting Service
+Powershell Set-Service 'WerSvc' -startuptype "disabled"
+rem Disables Windows Firewall Service
+rem Powershell Set-Service 'MpsSvc' -startuptype "disabled"
+rem Disables Media Center Receiver Service
+Powershell Set-Service 'ehRecvr' -startuptype "disabled"
+rem Disables Windows Media Center Scheduler Service
+Powershell Set-Service 'ehSched' -startuptype "disabled"
+rem Disables Windows Search
+Powershell Set-Service 'WSearch' -startuptype "disabled"
+rem Disables Windows Update
+Powershell Set-Service 'wuauserv' -startuptype "disabled"
+rem Disables WLAN AutoConfig
+Powershell Set-Service 'Wlansvc' -startuptype "disabled"
+rem Disables WWAN AutoConfig
+Powershell Set-Service 'WwanSvc' -startuptype "disabled"
+rem Disables Interactive Services Detection
+Powershell Set-Service 'UI0Detect' -startuptype "disabled"
+rem Disables Windows Media Player Network Sharing
+Powershell Set-Service 'WMPNetworkSvc' -startuptype "disabled"
+
+
+
+
+
+rem Making miscellaneous modifications
+
+
+rem Disables IPv6
+netsh interface teredo set state disable
+netsh interface 6to4 set state disabled
+netsh interface isatap set state disabled
+
+rem Deletes all shadow copies:
+vssadmin delete shadows /All /Quiet
+
+rem Disables System Restore:
+Powershell disable-computerrestore -drive c:\
+
+rem Disables the Firewall Profiles:
+netsh advfirewall set allprofiles state off
+
+rem Disables Hibernation:
+powercfg -H OFF
+
+rem Disables DEP:
+bcdedit /set {current} nx AlwaysOff
+
+rem Disables Windows Startup Repair:
+bcdedit /set {current} bootstatuspolicy ignoreallfailures
+
+rem Sets the Power Plan to High Performance:
+Powercfg -S 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+
+rem disables Superfetch:
+net stop "sysmain"
+
+rem Disables Last Access Time:
+fsutil behavior set DisableLastAccess 1
+
+rem Sets the monitor to never turn off while plugged in :
+Powercfg -X -monitor-timeout-ac 0
+
+rem Sets the monitor to never turn off on battery:
+Powercfg -X -monitor-timeout-dc 0
+
+
+
+
+
+rem Modifications to Scheduled Tasks
+
+
+schtasks /change /TN "\Microsoft\Windows\Defrag\ScheduledDefrag" /Disable
+schtasks /change /TN "\Microsoft\Windows\SystemRestore\SR" /Disable
+schtasks /change /TN "\Microsoft\Windows\Registry\RegIdleBackup" /Disable
+schtasks /change /TN "\Microsoft\Windows Defender\MPIdleTask" /Disable
+schtasks /change /TN "\Microsoft\Windows Defender\MP Scheduled Scan" /Disable
+schtasks /change /TN "\Microsoft\Windows\Maintenance\WinSAT" /Disable
