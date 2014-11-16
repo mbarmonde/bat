@@ -2,7 +2,6 @@ bat
 ===
 
 Microsoft Batch Scripts
-===
 
 Spacing Standards:
   - 5 spaces separate major sections and titles
