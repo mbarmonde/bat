@@ -1,4 +1,6 @@
+rem Author:       Mike Barmonde
 rem Description:  Runs Add/Remove Programs as the local Administrator Windows 7/Server2008 computers only
 rem Usage:        N/A
+rem Notes:        N/A
 
 runas /user:administrator "control appwiz.cpl"
