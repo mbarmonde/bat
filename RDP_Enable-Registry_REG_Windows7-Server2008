@@ -1,5 +1,7 @@
+rem Author:       Mike Barmonde
 rem Description:  Enables and Allows RDP through Windows 7/Server2008 computers only
 rem Usage:        N/A
+rem Notes:        N/A
 
 reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0x0 /f
 reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v UserAuthentication /t REG_DWORD /d 0 /f
