@@ -1,7 +1,7 @@
 rem Author:       Mike Barmonde
 rem Description:  A quick script for running SQLIO random writes and random read loads.
 rem Usage:        N/A
-rem Notes:        Get SQLIO at: https://drive.google.com/a/mikebarmonde.com/folderview?id=0B5OIlT1xfLkNSEQtVGlqMFJhSlU&usp=sharing
+rem Notes:        Get SQLIO at: https://drive.google.com/folderview?id=0B5OIlT1xfLkNSEQtVGlqMFJhSlU&usp=sharing
 
 rem SQLIO random write test
 echo "**********"
