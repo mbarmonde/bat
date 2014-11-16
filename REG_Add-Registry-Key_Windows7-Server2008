@@ -1,0 +1,4 @@
+rem Description:  Runs REGEDIT to add the specfific .REG file to the registry Windows 7/Server2008 computers only
+rem Usage:        Search and Replace \\path\file.reg with specific values
+
+REGEDIT /S \\path\file.reg
