@@ -5,6 +5,8 @@ rem Notes:        Get SQLIO at: https://drive.google.com/folderview?id=0B5OIlT1x
 
 
 
+
+
 echo "**********"
 echo "SQLIO random write test - increase run times"
 echo "---- 4 min ---------"
