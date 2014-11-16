@@ -1,0 +1,99 @@
+rem Author:       Mike Barmonde
+rem Description:  A long script for running SQLIO random writes and random read loads.
+rem Usage:        N/A
+rem Notes:        Get SQLIO at: https://drive.google.com/a/mikebarmonde.com/folderview?id=0B5OIlT1xfLkNSEQtVGlqMFJhSlU&usp=sharing
+
+echo "**********"
+echo "SQLIO random write test - increase run times"
+echo "---- 4 min ---------"
+time /t
+      sqlio -kW -frandom -t4 -s240  -b8 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 8 min ---------"
+time /t
+      sqlio -kW -frandom -t4 -s480  -b8 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "----15 min ---------"
+time /t
+      sqlio -kW -frandom -t4 -s900  -b8 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 30 min ---------"
+time /t
+      sqlio -kW -frandom -t4 -s1800 -b8 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+
+
+
+echo "**********"
+echo "SQLIO random read test - increase run times"
+echo "---- 4 min ---------"
+time /t
+      sqlio -kR -frandom -t4 -s240  -b8 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 8 min ---------"
+time /t
+      sqlio -kR -frandom -t4 -s480  -b8 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 15 min ---------"
+time /t
+      sqlio -kR -frandom -t4 -s900  -b8 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 30 min ---------"
+time /t
+      sqlio -kR -frandom -t4 -s1800 -b8 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 60 min ---------"
+time /t
+      sqlio -kR -frandom -t4 -s3600 -b8 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+time /t
+
+
+echo "**********"
+echo "SQLIO sequential write test - increase run times"
+echo "---- 4 min ---------"
+time /t
+      sqlio -kW -fsequential -t4 -s240  -b64 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 8 min ---------"
+time /t
+      sqlio -kW -fsequential -t4 -s480  -b64 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 15 min ---------"
+time /t
+      sqlio -kW -fsequential -t4 -s900  -b64 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 30 min ---------"
+time /t
+      sqlio -kW -fsequential -t4 -s1800 -b64 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 60 min ---------"
+time /t
+      sqlio -kW -fsequential -t4 -s3600 -b64 -o8 -LS -BH -Fparam.txt
+timeout /T 120time /t
+
+
+echo "**********"
+echo "SQLIO sequential read test - increase run times"
+echo "---- 4 min ---------"
+time /t
+      sqlio -kR -fsequential -t4 -s240  -b64 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 8 min ---------"
+time /t
+      sqlio -kR -fsequential -t4 -s480  -b64 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 15 min ---------"
+time /t
+      sqlio -kR -fsequential -t4 -s900  -b64 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 30 min ---------"
+time /t
+      sqlio -kR -fsequential -t4 -s1800 -b64 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+echo "---- 60 min ---------"
+time /t
+      sqlio -kR -fsequential -t4 -s3600 -b64 -o8 -LS -BH -Fparam.txt
+timeout /T 120
+time /t
+
